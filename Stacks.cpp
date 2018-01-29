@@ -11,7 +11,6 @@ public:
 	node *next;
 	node *prev;
 	node(string);
-	int count;
 };
 node::node(string value) {
 	info = value;
@@ -30,27 +29,24 @@ void mergesort(node** head)
 		return;
 	}
 	split(*head, &list1, &list2);
-	mergesort(&list1); //T(n/2)
-	mergesort(&list2);//T(n/2)
-	*head = mergesortlist(list1, list2); //2T(n/2)
+	mergesort(&list1);
+	mergesort(&list2);
+	*head = mergesortlist(list1, list2);
 }
 node* mergesortlist(node* list1, node* list2)
 {
-
 	node* result = NULL;
-
 	if (list1 == NULL) {
-		return(list2); //n
+		return(list2);
 	}
 	else if (list2 == NULL) {
-		return(list1); //n
+		return(list1);
 	}
-
 	if (list1->info <= list2->info)
 	{
-		list1->next = mergesortlist(list1->next, list2);//(2T(n/2)
-		list1->next->prev = list1;//n
-		list1->prev = NULL;//n
+		list1->next = mergesortlist(list1->next, list2);
+		list1->next->prev = list1;
+		list1->prev = NULL;
 		return list1;
 	}
 	else
@@ -105,7 +101,6 @@ string *convert(node* head, int length) {
 }
 int RecBinSearch(string array[], node* head, int first, int size)
 {
-
 	if (size >= first) {
 		int mid = first + (size - first) / 2;
 
@@ -113,12 +108,10 @@ int RecBinSearch(string array[], node* head, int first, int size)
 		{
 			return mid;
 		}
-
 		else if (array[mid] < head->info)
 		{
 			return RecBinSearch(array, head, mid + 1, size);
 		}
-
 		else
 		{
 			return RecBinSearch(array, head, first, mid - 1);
